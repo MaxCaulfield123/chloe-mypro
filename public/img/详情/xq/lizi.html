@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+}
+.container{
+width: 400px;
+height: 400px;
+position: relative;
+left:200px;
+top:200px;
+}
+.leftbox{
+position: relative;
+width: 400px;
+height: 400px;
+}
+.left{
+width: 400px;
+height: 400px;
+position: absolute;
+top: 0;
+left: 0;
+}
+.rightbox{
+width: 400px;
+height: 400px;
+position: absolute;
+left: 420px;
+top: 0;
+overflow: hidden;
+display: none;
+}
+.right{
+width: 800px;
+height: 800px;
+position: absolute;
+}
+.pointer{
+width: 100px;
+height: 100px;
+background: black;
+opacity: .5;
+cursor: move;
+position: absolute;
+top: 0;
+left: 0;
+display: none;
+color: white;
+}
+</style>
+<script>
+window.onload=function(){
+var leftbox=document.querySelector(".leftbox");
+var left=document.querySelector(".left");
+var pointer=document.querySelector(".pointer");
+var rightbox=document.querySelector(".rightbox");
+var right=document.querySelector(".right");
+leftbox.onmouseover=function(){
+pointer.style.display="block";
+rightbox.style.display="block";
+}
+leftbox.onmouseout=function(){
+pointer.style.display="none";
+rightbox.style.display="none";
+}
+leftbox.onmousemove=function(event){
+var oEvent=event||window.event;
+var x=oEvent.clientX;
+var y=oEvent.clientY;
+pointer.innerText=x+":px;"+" "+y+":px";
+l=x-pointer.offsetWidth/2;
+t=y-pointer.offsetHeight/2;
+
+if(x<pointer.offsetWidth/2){
+l=0;
+}else if(x>=leftbox.offsetWidth-pointer.offsetWidth/2){
+l=leftbox.offsetWidth-pointer.offsetWidth;
+}
+if(y<pointer.offsetHeight/2){
+t=0;
+}else if(y>leftbox.offsetHeight-pointer.offsetHeight/2){
+t=leftbox.offsetHeight-pointer.offsetHeight;
+}
+pointer.style.left=l+"px";
+pointer.style.top=t+"px";
+var imgl=(rightbox.offsetWidth-right.offsetWidth)/(leftbox.offsetWidth-pointer.offsetWidth);
+var imgt=(rightbox.offsetHeight-right.offsetHeight)/(leftbox.offsetHeight-pointer.offsetHeight);
+right.style.left=imgl*l+"px";
+right.style.top=imgt*t+"px";
+}
+}
+</script>
+</head>
+<body>
+<div class="containter">
+    <div class="leftbox">
+        <img src="/xq/middle/middle.webp" alt="" class="left">
+        <div class="pointer"></div>
+    </div>
+    <div class="rightbox">
+        <img src="/xq/big/big.webp" alt="" class="right">
+    </div>
+    <!-- https://img.alicdn.com/bao/uploaded/i3/TB12fEyKXXXXXX5XXXXXXXXXXXX_!!0-item_pic.jpg_400x400q90.jpg -->
+    <!-- https://img.alicdn.com/bao/uploaded/i3/TB12fEyKXXXXXX5XXXXXXXXXXXX_!!0-item_pic.jpg_800x800q90.jpg -->
+</div>
+</body>
+</html>

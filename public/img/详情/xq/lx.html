@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* 如果做不出来可以用JQ的 zoom做 */
+
+        /* 全部包裹div */
+        .all{position: relative;left: 200px;height: 200px;}
+        /* 中图片，触发事件div */
+        .mid{width: 450px;height: 450px;position: relative;}
+        /* 大图片，显示隐藏 */
+        .big{
+            width: 450px;height: 450px;
+            position: absolute;
+            left: 450px;top: 0px;
+            overflow: hidden;
+            display: none;
+        } 
+        /* 图层，显示隐藏 */
+        .tuceng{
+            width: 225px;
+            height: 225px;
+            background-color: yellow;
+            opacity: 0.3;
+            position: absolute;
+            top: 0;left: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <div class="mid" id="mid">
+                <img src="/xq/middle/middle.webp" alt="" class="midimg">
+                <div class="tuceng" id="tuceng"></div>
+        </div>
+        <div class="big" id="big">
+            <img src="/xq/big/big.webp" alt="" class="bigimg">
+        </div>
+    </div>
+    <script>
+         var mask=document.getElementById("tuceng")
+         console.log(mask)
+        // //获取大图片
+         var big=document.getElementById("big")
+         console.log(big)
+        // 获取鼠标进入区域
+        var mid=document.getElementById("mid");
+        console.log(mid)
+        
+        // 鼠标移入
+        mid.onmouseover=function(){
+            mask.style.display='block'
+            big.style.display='block'
+        }
+        //鼠标移出
+        mid.onmouseout=function(){
+            mask.style.display='none'
+            big.style.display='none'
+        }
+        // 鼠标移动
+        mid.onmousemove=function(e){
+            var l=e.offsetX-225/2;
+            var t=e.offsetY-225/2;
+            mask.style.left=l+"px";
+            mask.style.top=t+"px";
+            //console.log(mask.style.left,mask.style.top)
+        }
+
+
+        // //进入中图片，显示遮罩;
+        // mid.onmouseenter=function(){
+        //     mask.style.display="block"
+        //     lg.style.display="block"
+        // }
+        // mid.onmouseout=function(){
+        //     mask.style.display="none"
+        //     lg.style.display="none"
+        // }
+        // mid.onmousemove=function(e){
+        //     var left=e.offsetX-253/2;
+        //     var top=e.offsetY-253/2;
+        //     console.log(left,top)
+        //     mask.style.left=left+"px";
+        //     mask.style.top=top+"px"
+        // }
+    </script>
+</body>
+</html>
